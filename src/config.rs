@@ -1,6 +1,6 @@
 use std::sync::Arc;
 
-use actix_web::{web, HttpMessage, HttpRequest};
+use actix_web::{HttpMessage, HttpRequest, web};
 
 use crate::error::XMLPayloadError;
 
@@ -84,7 +84,7 @@ impl XmlConfig {
                 || self
                     .content_type
                     .as_ref()
-                    .map_or(false, |predicate| predicate(mime))
+                    .is_some_and(|predicate| predicate(mime))
             {
                 Ok(())
             } else {

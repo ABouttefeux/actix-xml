@@ -1,7 +1,7 @@
 use actix_web::error::PayloadError;
 use actix_web::http::StatusCode;
 use actix_web::{HttpResponse, ResponseError};
-use quick_xml::DeError as XMLError;
+use fast_xml::DeError as XMLError;
 use thiserror::Error;
 
 /// A set of errors that can occur during parsing xml payloads

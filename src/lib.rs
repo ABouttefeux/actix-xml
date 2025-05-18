@@ -44,12 +44,12 @@ use std::pin::Pin;
 use std::task::{Context, Poll};
 use std::{fmt, ops};
 
+use actix_web::Error as ActixError;
 use actix_web::dev;
 use actix_web::http::header;
 use actix_web::web::BytesMut;
-use actix_web::Error as ActixError;
 use actix_web::{FromRequest, HttpRequest};
-use futures::future::{err, Either, LocalBoxFuture, Ready};
+use futures::future::{Either, LocalBoxFuture, Ready, err};
 use futures::{FutureExt, StreamExt};
 use serde::de::DeserializeOwned;
 
@@ -259,7 +259,7 @@ where
                         body.extend_from_slice(&chunk);
                     }
                 }
-                Ok(quick_xml::de::from_reader(&*body)?)
+                Ok(fast_xml::de::from_reader(&*body)?)
             }
             .boxed_local(),
         );
